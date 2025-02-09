@@ -1,0 +1,50 @@
+[
+    {
+      "id": 1,
+      "title": "Industrial Steel Framework",
+      "date": "2023-10-01",
+      "image": "/hero1.jpg",
+      "description": "A robust steel framework designed for industrial use, ensuring durability and strength.",
+      "moreImages": ["/hero3.jpg", "/hero4.jpg"]
+    },
+    {
+      "id": 2,
+      "title": "Commercial Building Structure",
+      "date": "2023-09-15",
+      "image": "/hero2.jpg",
+      "description": "Steel structures for commercial buildings, offering flexibility and modern design.",
+      "moreImages": ["/hero4.jpg", "/thum1.jpg"]
+    },
+    {
+      "id": 3,
+      "title": "Bridge Construction",
+      "date": "2023-08-20",
+      "image": "/thump2.jpg",
+      "description": "Steel components used in the construction of a large-scale bridge project.",
+      "moreImages": ["/thump3.jpg", "/hero6.jpg"]
+    },
+    {
+      "id": 4,
+      "title": "Residential Steel Frames",
+      "date": "2023-07-10",
+      "image": "/hero4.jpg",
+      "description": "Custom steel frames for residential buildings, combining strength and aesthetics.",
+      "moreImages": ["/thump2.jpg", "/hero6.jpg"]
+    },
+    {
+      "id": 5,
+      "title": "Residential Steel Frames",
+      "date": "2023-07-10",
+      "image": "/hero4.jpg",
+      "description": "Custom steel frames for residential buildings, combining strength and aesthetics.",
+      "moreImages": ["/thump2.jpg", "/hero6.jpg"]
+    },
+    {
+      "id": 6,
+      "title": "Residential Steel Frames",
+      "date": "2023-07-10",
+      "image": "/hero4.jpg",
+      "description": "Custom steel frames for residential buildings, combining strength and aesthetics.",
+      "moreImages": ["/thump2.jpg", "/hero6.jpg"]
+    }
+  ]

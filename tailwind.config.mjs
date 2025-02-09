@@ -8,8 +8,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primary: {
+          DEFAULT: '#4A5568', // Steel Gray
+          light: '#CBD5E0',   // Metallic Silver
+          dark: '#1A202C',    // Charcoal Black
+        },
+        secondary: '#2B6CB0', // Industrial Blue
+        accent: {
+          DEFAULT: '#DD6B20',  // Safety Orange
+          green: '#38A169',    // Industrial Green
+        },
+        background: {
+          light: '#EDF2F7',    // Light Gray
+          white: '#FFFFFF',    // White
+        },
       },
     },
   },
