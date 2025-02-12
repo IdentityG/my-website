@@ -46,7 +46,7 @@ const ServicesSection = () => {
 
   return (
     <section ref={servicesRef} className="relative py-16 px-4 md:py-24 md:px-8 bg-white" id="services">
-      <div className="container mx-auto px-6 space-y-16">
+      <div className="container mx-auto px-6 space-y-16 py-8">
         <motion.h2
           className="text-3xl md:text-4xl font-bold text-center text-primary-dark"
           initial={{ opacity: 0, y: -20 }}

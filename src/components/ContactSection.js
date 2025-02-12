@@ -71,12 +71,12 @@ const ContactSection = () => {
               {/* Submit Button Animation */}
               <motion.button
                 type="submit"
-                className="w-full py-2 px-4 bg-accent-DEFAULT text-white font-semibold rounded-md hover:bg-accent-hover transition-colors"
+                className="w-full py-3 px-6 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-md border border-blue-700 shadow-lg shadow-blue-300 hover:shadow-xl hover:from-indigo-600 hover:to-blue-500 transition-all duration-300 ease-in-out"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 100 }}
-              >
+             >
                 Send Message
-              </motion.button>
+</motion.button>
             </form>
           </motion.div>
         </div>

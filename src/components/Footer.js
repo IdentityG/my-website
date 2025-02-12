@@ -22,7 +22,7 @@ const Footer = () => {
 
   return (
     <motion.footer
-      className="bg-primary-dark text-white py-12"
+      className="bg-white text-gray-700 py-12"
       variants={footerVariants}
       initial="hidden"
       whileInView="visible"
@@ -46,7 +46,7 @@ const Footer = () => {
                 <motion.a
                   key={social.name}
                   href={social.link}
-                  className="text-white hover:text-accent-DEFAULT transition-colors p-2 bg-gray-700 rounded-full"
+                  className="text-gray-700 hover:text-accent-DEFAULT transition-colors p-2 bg-gray-100 rounded-full"
                   whileHover={{ scale: 1.2 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
@@ -99,7 +99,7 @@ const Footer = () => {
         </div>
 
         {/* Copyright Section */}
-        <motion.div className="mt-12 border-t border-gray-200 pt-6 text-center" variants={footerVariants}>
+        <motion.div className="mt-12 border-t border-gray-300 pt-6 text-center" variants={footerVariants}>
           <p className="text-sm">
             © {new Date().getFullYear()} SteelCo. All rights reserved.
           </p>

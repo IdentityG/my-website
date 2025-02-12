@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion } from 'framer-motion';
 import { Particles } from 'react-tsparticles';
 import CountUp from 'react-countup';
+import Link from 'next/link';
 
 // Register GSAP ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -115,7 +116,7 @@ const AboutSection = () => {
             cutting-edge technology for sustainable steel manufacturing.
           </p>
           <button className="bg-secondary text-background-light px-6 py-3 rounded-lg hover:bg-secondary/90 transition duration-300">
-            Learn More
+          <Link href="/about" className="text-white">Learn More</Link>
           </button>
         </motion.div>
       </div>

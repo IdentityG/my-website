@@ -1,9 +1,9 @@
-import ServicesSection from '@/components/ServicesSection';
+import ServiceDetails from '@/components/service/ServiceDetails';
 
 export default function Services() {
   return (
     <div className="min-h-screen">
-      <ServicesSection />
+      <ServiceDetails />
     </div>
   );
 }

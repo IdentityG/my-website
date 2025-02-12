@@ -39,22 +39,22 @@ const teamMembers = [
   {
     name: 'John Smith',
     role: 'CEO & Founder',
-    image: '/hero4.jpg'
+    image: 'https://randomuser.me/api/portraits/women/2.jpg'
   },
   {
     name: 'Emily Johnson',
     role: 'Chief Operations Officer',
-    image: '/hero1.jpg'
+    image: 'https://randomuser.me/api/portraits/men/1.jpg'
   },
   {
     name: 'Michael Chen',
     role: 'Head of Engineering',
-    image: '/hero6.jpg'
+    image: 'https://randomuser.me/api/portraits/men/4.jpg'
   },
   {
     name: 'Sarah Williams',
     role: 'Sustainability Director',
-    image: '/thump2.jpg'
+    image: 'https://randomuser.me/api/portraits/women/4.jpg'
   }
 ];
 
@@ -62,7 +62,7 @@ const AboutDetail = () => {
   return (
     <div className="bg-white min-h-screen">
       {/* Hero Section */}
-      <div className="relative bg-gray-100 py-16 md:py-24 sm:py-24">
+      <div className="relative bg-gray-100 py-16 md:py-24 ">
         <div className="absolute inset-0 -z-10">
           <Particles
             options={{
@@ -76,7 +76,7 @@ const AboutDetail = () => {
           />
         </div>
         
-        <div className="container mx-auto px-6 flex flex-col md:flex-row items-center">
+        <div className="container mx-auto px-6 flex flex-col md:flex-row items-center py-8">
           <motion.div 
             initial={{ opacity: 0, x: -100 }}
             animate={{ opacity: 1, x: 0 }}
