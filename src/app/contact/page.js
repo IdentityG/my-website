@@ -1,9 +1,9 @@
-import ContactSection from '@/components/ContactSection';
+import ContactDetail from '@/components/contact/ContactDetail';
 
 export default function Contact() {
   return (
     <div className="min-h-screen">
-      <ContactSection />
+      <ContactDetail />
     </div>
   );
 }
