@@ -3,7 +3,6 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
-import { Particles } from "react-tsparticles";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -39,22 +38,29 @@ const ServicesSection = () => {
   ];
 
   useEffect(() => {
+    console.log("cardRefs:", cardRefs.current);
+    console.log("services:", services);
+
     cardRefs.current.forEach((card, index) => {
-      gsap.fromTo(
-        card,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          delay: index * 0.2,
-          scrollTrigger: {
-            trigger: card,
-            start: "top 80%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
+      if (card) {
+        gsap.fromTo(
+          card,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            delay: index * 0.2,
+            scrollTrigger: {
+              trigger: card,
+              start: "top 80%",
+              toggleActions: "play none none none",
+            },
+            onStart: () => console.log(`Animation started for card ${index}`),
+            onComplete: () => console.log(`Animation completed for card ${index}`),
+          }
+        );
+      }
     });
 
     setTimeout(() => {
