@@ -103,7 +103,7 @@ const ProjectsSection = () => {
   return (
     <section
       ref={projectsRef}
-      className="py-16 md:py-24 md:px-8 bg-white"
+      className="py-16 md:py-24 md:px-8 bg-white sm:py-16"
       id="projects"
     >
       <div className="container mx-auto px-6">

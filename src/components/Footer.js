@@ -1,148 +1,111 @@
-"use client"
-import React, { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-
-// Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger);
+"use client";
+import React from "react";
+import { motion } from "framer-motion";
+import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import Link from "next/link";
 
 const Footer = () => {
-  const footerRef = useRef(null);
-  const footerLinksRef = useRef([]);
+  // Animation Variants
+  const footerVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+  };
 
-  useEffect(() => {
-    // GSAP animation for the footer
-    if (footerLinksRef.current.length > 0) {
-      gsap.from(footerLinksRef.current, {
-        opacity: 0,
-        y: 20,
-        duration: 0.6,
-        stagger: 0.2,
-        ease: "power4.out",
-        scrollTrigger: {
-          trigger: footerRef.current,
-          start: "top 90%",
-          toggleActions: "play none none reverse",
-        },
-      });
-    }
-  }, []);
+  const linksVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (index) => ({
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, delay: index * 0.2, ease: "easeOut" },
+    }),
+  };
 
   return (
-    <footer
-      ref={footerRef}
-      className="bg-white text-primary-dark py-16"
+    <motion.footer
+      className="bg-primary-dark text-white py-12"
+      variants={footerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
     >
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Column 1: Logo and Description */}
-          <div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-center md:text-left">
+          {/* Column 1: Company Info */}
+          <motion.div variants={footerVariants}>
             <h3 className="text-2xl font-bold mb-4 text-accent-DEFAULT">SteelCo</h3>
-            <p className="text-sm mb-4 text-primary-dark">
+            <p className="text-sm mb-4">
               Premium steel solutions tailored to your needs. Quality, reliability, and innovation.
             </p>
-            <div className="flex space-x-4 mt-4">
-              <a
-                href="#"
-                className="text-accent-DEFAULT hover:text-accent-hover transition-colors"
-              >
-                <i className="fab fa-facebook-f"></i>
-              </a>
-              <a
-                href="#"
-                className="text-accent-DEFAULT hover:text-accent-hover transition-colors"
-              >
-                <i className="fab fa-twitter"></i>
-              </a>
-              <a
-                href="#"
-                className="text-accent-DEFAULT hover:text-accent-hover transition-colors"
-              >
-                <i className="fab fa-instagram"></i>
-              </a>
-              <a
-                href="#"
-                className="text-accent-DEFAULT hover:text-accent-hover transition-colors"
-              >
-                <i className="fab fa-linkedin-in"></i>
-              </a>
+            <div className="flex justify-center md:justify-start space-x-4 mt-4">
+              {[
+                { icon: <FaFacebookF />, link: "#", name: "Facebook" },
+                { icon: <FaTwitter />, link: "#", name: "Twitter" },
+                { icon: <FaInstagram />, link: "#", name: "Instagram" },
+                { icon: <FaLinkedinIn />, link: "#", name: "LinkedIn" },
+              ].map((social, index) => (
+                <motion.a
+                  key={social.name}
+                  href={social.link}
+                  className="text-white hover:text-accent-DEFAULT transition-colors p-2 bg-gray-700 rounded-full"
+                  whileHover={{ scale: 1.2 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  {social.icon}
+                </motion.a>
+              ))}
             </div>
-          </div>
+          </motion.div>
 
-          {/* Column 2: Quick Links */}
-          <div>
+          {/* Column 2: Quick Links (Updated to Match Navbar) */}
+          <motion.div variants={footerVariants}>
             <h4 className="text-lg font-semibold mb-4 text-accent-DEFAULT">Quick Links</h4>
-            <ul>
-              <li
-                ref={(el) => (footerLinksRef.current[0] = el)}
-                className="mb-2"
-              >
-                <a
-                  href="#home"
-                  className="hover:text-accent-hover transition-colors text-primary-dark"
+            <ul className="space-y-2">
+              {[
+                { href: "/", label: "Home" },
+                { href: "/about", label: "About Us" },
+                { href: "/service", label: "Services" },
+                { href: "/projects", label: "Projects" },
+                { href: "/contact", label: "Contact" },
+              ].map((link, index) => (
+                <motion.li
+                  key={link.href}
+                  variants={linksVariants}
+                  custom={index}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
                 >
-                  Home
-                </a>
-              </li>
-              <li
-                ref={(el) => (footerLinksRef.current[1] = el)}
-                className="mb-2"
-              >
-                <a
-                  href="#about"
-                  className="hover:text-accent-hover transition-colors text-primary-dark"
-                >
-                  About Us
-                </a>
-              </li>
-              <li
-                ref={(el) => (footerLinksRef.current[2] = el)}
-                className="mb-2"
-              >
-                <a
-                  href="#services"
-                  className="hover:text-accent-hover transition-colors text-primary-dark"
-                >
-                  Services
-                </a>
-              </li>
-              <li
-                ref={(el) => (footerLinksRef.current[3] = el)}
-                className="mb-2"
-              >
-                <a
-                  href="#products"
-                  className="hover:text-accent-hover transition-colors text-primary-dark"
-                >
-                  Products
-                </a>
-              </li>
+                  <Link href={link.href} className="hover:text-accent-DEFAULT transition-colors">
+                    {link.label}
+                  </Link>
+                </motion.li>
+              ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Column 3: Contact Info */}
-          <div>
+          <motion.div variants={footerVariants}>
             <h4 className="text-lg font-semibold mb-4 text-accent-DEFAULT">Contact Us</h4>
-            <p className="mb-2 text-primary-dark">
+            <p className="mb-2">
               <strong className="font-bold">Address:</strong> 123 Steel Avenue, Industrial City, USA
             </p>
-            <p className="mb-2 text-primary-dark">
+            <p className="mb-2">
               <strong className="font-bold">Phone:</strong> +1 (123) 456-7890
             </p>
-            <p className="text-primary-dark">
+            <p>
               <strong className="font-bold">Email:</strong> info@steelcompany.com
             </p>
-          </div>
+          </motion.div>
         </div>
 
         {/* Copyright Section */}
-        <div className="mt-12 border-t border-gray-200 pt-6 text-center">
-          <p className="text-sm text-primary-dark">
+        <motion.div className="mt-12 border-t border-gray-200 pt-6 text-center" variants={footerVariants}>
+          <p className="text-sm">
             © {new Date().getFullYear()} SteelCo. All rights reserved.
           </p>
-        </div>
+        </motion.div>
       </div>
-    </footer>
+    </motion.footer>
   );
 };
 
