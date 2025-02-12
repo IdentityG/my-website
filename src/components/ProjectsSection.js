@@ -30,40 +30,74 @@ const ProjectsSection = () => {
 
   // GSAP Animation for card entrance
   useEffect(() => {
+    // Set initial state
+    cardRefs.current.forEach((cardRef) => {
+      gsap.set(cardRef, { opacity: 1, y: 0 });
+    });
+
+    // Create animations
     cardRefs.current.forEach((cardRef, index) => {
-      gsap.from(cardRef, {
+      const anim = gsap.from(cardRef, {
         opacity: 0,
         y: 50,
         duration: 1,
-        scrollTrigger: {
-          trigger: projectsRef.current,
-          start: 'top 70%', // Start animation when the top of the section is 70% in view
-          end: 'bottom 30%', // End animation when the bottom of the section is 30% in view
-          toggleActions: 'play none none none', // Play animation once
-        },
+        paused: true, // Start paused
         delay: index * 0.2, // Staggered delay
       });
+
+      ScrollTrigger.create({
+        trigger: projectsRef.current,
+        start: 'top 70%',
+        end: 'bottom 30%',
+        onEnter: () => anim.play(),
+        onEnterBack: () => anim.play(),
+        onLeave: () => anim.reverse(),
+        onLeaveBack: () => anim.reverse(),
+      });
     });
+
+    return () => {
+      // Clean up ScrollTrigger instances on unmount
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
   }, [projects]); // Re-run animation when projects data is loaded
 
   // GSAP Animation for text reveal
   useEffect(() => {
-    cardRefs.current.forEach((cardRef, index) => {
+    cardRefs.current.forEach((cardRef) => {
       const title = cardRef.querySelector('h3');
       const description = cardRef.querySelector('p');
+      const elements = [title, description];
 
-      gsap.from([title, description], {
-        opacity: 0,
-        y: 20,
-        duration: 0.8,
-        stagger: 0.2,
-        scrollTrigger: {
+      // Set initial state
+      gsap.set(elements, { opacity: 1, y: 0 });
+
+      // Create animations for text elements
+      elements.forEach((element, index) => {
+        const anim = gsap.from(element, {
+          opacity: 0,
+          y: 20,
+          duration: 0.8,
+          paused: true,
+          delay: index * 0.2,
+        });
+
+        ScrollTrigger.create({
           trigger: cardRef,
           start: 'top 80%',
-          toggleActions: 'play none none none',
-        },
+          end: 'bottom 20%',
+          onEnter: () => anim.play(),
+          onEnterBack: () => anim.play(),
+          onLeave: () => anim.reverse(),
+          onLeaveBack: () => anim.reverse(),
+        });
       });
     });
+
+    return () => {
+      // Clean up ScrollTrigger instances on unmount
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
   }, [projects]);
 
   return (
@@ -81,7 +115,7 @@ const ProjectsSection = () => {
             <div
               key={project.id}
               ref={(el) => (cardRefs.current[index] = el)}
-              className="bg-primary-light p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:rotate-1"
+              className="bg-background-light p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:rotate-1"
             >
               <div className="overflow-hidden rounded-lg">
                 <img

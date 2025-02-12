@@ -1,9 +1,10 @@
-import AboutSection from '@/components/AboutSection';
+import React from 'react';
+import AboutDetail from '@/components/About/AboutDetail';
 
 export default function About() {
   return (
     <div className="min-h-screen">
-      <AboutSection />
+      <AboutDetail />
     </div>
   );
 }

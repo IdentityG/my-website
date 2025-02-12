@@ -1,5 +1,4 @@
 'use client'; // Mark as a Client Component
-
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import Link from 'next/link';
@@ -87,30 +86,37 @@ const Navbar = () => {
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-6">
             <Link
+              href="/"
+              ref={(el) => (linksRef.current[0] = el)}
+              className="text-gray-700 hover:text-blue-500"
+            >
+              Home
+            </Link>
+            <Link
               href="/about"
               ref={(el) => (linksRef.current[0] = el)}
-              className="text-gray-700 hover:text-green-500"
+              className="text-gray-700 hover:text-blue-500"
             >
               About
             </Link>
             <Link
               href="/service"
               ref={(el) => (linksRef.current[1] = el)}
-              className="text-gray-700 hover:text-green-500"
+              className="text-gray-700 hover:text-blue-500"
             >
               Services
             </Link>
             <Link
               href="/projects"
               ref={(el) => (linksRef.current[2] = el)}
-              className="text-gray-700 hover:text-green-500"
+              className="text-gray-700 hover:text-blue-500"
             >
               Projects
             </Link>
             <Link
               href="/contact"
               ref={(el) => (linksRef.current[3] = el)}
-              className="text-gray-700 hover:text-green-500"
+              className="text-gray-700 hover:text-blue-500"
             >
               Contact
             </Link>
@@ -118,7 +124,7 @@ const Navbar = () => {
 
           {/* Mobile Menu Toggle */}
           <button
-            className="md:hidden p-2 text-gray-700 hover:text-green-500 focus:outline-none z-50"
+            className="md:hidden p-2 text-gray-700 hover:text-blue-500 focus:outline-none z-50"
             onClick={() => (isMenuOpen ? closeMenu() : setIsMenuOpen(true))}
           >
             {isMenuOpen ? (
@@ -163,29 +169,36 @@ const Navbar = () => {
           >
             {/* Navigation Links */}
             <Link
+              href="/"
+              className="text-2xl text-gray-700 hover:text-blue-500"
+              onClick={closeMenu}
+            >
+              Home
+            </Link>
+            <Link
               href="/about"
-              className="text-2xl text-gray-700 hover:text-green-500"
+              className="text-2xl text-gray-700 hover:text-blue-500"
               onClick={closeMenu}
             >
               About
             </Link>
             <Link
               href="/service"
-              className="text-2xl text-gray-700 hover:text-green-500"
+              className="text-2xl text-gray-700 hover:text-blue-500"
               onClick={closeMenu}
             >
               Services
             </Link>
             <Link
               href="/projects"
-              className="text-2xl text-gray-700 hover:text-green-500"
+              className="text-2xl text-gray-700 hover:text-blue-500"
               onClick={closeMenu}
             >
               Projects
             </Link>
             <Link
               href="/contact"
-              className="text-2xl text-gray-700 hover:text-green-500"
+              className="text-2xl text-gray-700 hover:text-blue-500"
               onClick={closeMenu}
             >
               Contact
@@ -197,7 +210,7 @@ const Navbar = () => {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-700 hover:text-green-500"
+                className="text-gray-700 hover:text-blue-500"
               >
                 <svg
                   className="w-8 h-8"
@@ -212,7 +225,7 @@ const Navbar = () => {
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-700 hover:text-green-500"
+                className="text-gray-700 hover:text-blue-500"
               >
                 <svg
                   className="w-8 h-8"
@@ -227,7 +240,7 @@ const Navbar = () => {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-700 hover:text-green-500"
+                className="text-gray-700 hover:text-blue-500"
               >
                 <svg
                   className="w-8 h-8"

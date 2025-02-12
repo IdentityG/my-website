@@ -75,19 +75,24 @@ const HeroSection = () => {
 
   // GSAP animation for background and text change
   useEffect(() => {
-    if (!mounted) return;
+    if (!mounted || !backgroundRef.current) return;
 
     // Animate background image transition
-    gsap.to(backgroundRef.current, {
+    const currentBackground = backgroundRef.current;
+    
+    gsap.to(currentBackground, {
       opacity: 0,
       duration: 0.5,
       onComplete: () => {
-        // Update the background image
-        backgroundRef.current.style.backgroundImage = `url(${slides[activeIndex].full})`;
-        gsap.to(backgroundRef.current, {
-          opacity: 1,
-          duration: 0.5,
-        });
+        // Safely update the background image
+        if (currentBackground) {
+          currentBackground.style.backgroundImage = `url(${slides[activeIndex].full})`;
+          
+          gsap.to(currentBackground, {
+            opacity: 1,
+            duration: 0.5,
+          });
+        }
       },
     });
 
@@ -99,22 +104,16 @@ const HeroSection = () => {
     });
 
     // Highlight the active thumbnail
-    thumbnailRefs.current.forEach((thumb, index) => {
-      if (index === activeIndex) {
-        gsap.to(thumb, {
-          scale: 1.2,
-          borderColor: '#4ade80', // Green border for active thumbnail
-          duration: 0.2,
-        });
-      } else {
-        gsap.to(thumb, {
-          scale: 1,
-          borderColor: 'transparent',
-          duration: 0.2,
+    thumbnailRefs.current.forEach((ref, index) => {
+      if (ref) {
+        gsap.to(ref, {
+          scale: index === activeIndex ? 1.1 : 1,
+          opacity: index === activeIndex ? 1 : 0.6,
+          duration: 0.3,
         });
       }
     });
-  }, [activeIndex, mounted, slides]);
+  }, [mounted, activeIndex, slides]);
 
   return (
     <div className="relative h-screen overflow-hidden">
