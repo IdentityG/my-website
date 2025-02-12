@@ -1,42 +1,9 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const FAQSection = () => {
-  const faqItemsRef = useRef([]);
   const [activeIndex, setActiveIndex] = useState(null);
-
-  useEffect(() => {
-    faqItemsRef.current.forEach((item, index) => {
-      gsap.fromTo(
-        item,
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          delay: index * 0.1,
-          ease: "power4.out",
-          scrollTrigger: {
-            trigger: item,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    });
-
-    setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 500);
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, []);
 
   const faqData = [
     {
@@ -57,27 +24,65 @@ const FAQSection = () => {
     },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (index) => ({
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, delay: index * 0.1, ease: "easeOut" },
+    }),
+  };
+
   return (
     <section className="py-16 bg-background-light">
       <div className="container mx-auto px-6">
-        <h2 className="text-4xl font-bold text-center text-primary-dark mb-12">Frequently Asked Questions</h2>
+        <motion.h2
+          className="text-4xl font-bold text-center text-primary-dark mb-12"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          Frequently Asked Questions
+        </motion.h2>
         <div className="space-y-4">
           {faqData.map((faq, index) => (
-            <div
+            <motion.div
               key={index}
-              ref={(el) => (faqItemsRef.current[index] = el)}
-              className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform hover:scale-101"
+              className="bg-white rounded-lg shadow-lg overflow-hidden"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={index}
             >
-              <button onClick={() => setActiveIndex(activeIndex === index ? null : index)} className="w-full flex items-center justify-between p-6 border-b border-gray-200">
+              <button
+                onClick={() => setActiveIndex(activeIndex === index ? null : index)}
+                className="w-full flex items-center justify-between p-6 border-b border-gray-200 transition-all hover:bg-gray-100"
+              >
                 <span className="text-lg font-semibold text-primary-dark">{faq.question}</span>
-                <span className="text-2xl text-accent-DEFAULT">{activeIndex === index ? "➖" : "➕"}</span>
+                <motion.span
+                  className="text-2xl text-accent-DEFAULT"
+                  animate={{ rotate: activeIndex === index ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {activeIndex === index ? "➖" : "➕"}
+                </motion.span>
               </button>
-              {activeIndex === index && (
-                <div className="p-6 text-primary-dark">
-                  <p>{faq.answer}</p>
-                </div>
-              )}
-            </div>
+
+              <AnimatePresence>
+                {activeIndex === index && (
+                  <motion.div
+                    className="p-6 text-primary-dark"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                  >
+                    <p>{faq.answer}</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
           ))}
         </div>
       </div>
