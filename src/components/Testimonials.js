@@ -1,42 +1,8 @@
 "use client";
-import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import React from "react";
+import { motion } from "framer-motion";
 
 const Testimonials = () => {
-  const testimonialCardsRef = useRef([]);
-
-  useEffect(() => {
-    testimonialCardsRef.current.forEach((card, index) => {
-      gsap.fromTo(
-        card,
-        { opacity: 0, scale: 0.8 },
-        {
-          opacity: 1,
-          scale: 1,
-          duration: 1,
-          delay: index * 0.2,
-          ease: "power4.out",
-          scrollTrigger: {
-            trigger: card,
-            start: "top 80%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-    });
-
-    setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 500);
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, []);
-
   const testimonials = [
     { name: "John Doe", company: "ABC Construction", testimonial: "The steel quality provided by this company is exceptional. Their products have greatly improved our construction projects.", image: "https://randomuser.me/api/portraits/men/1.jpg" },
     { name: "Jane Smith", company: "XYZ Automotive", testimonial: "We rely on their steel for our automotive components. Their service and quality are unmatched.", image: "https://randomuser.me/api/portraits/women/2.jpg" },
@@ -50,10 +16,13 @@ const Testimonials = () => {
         <h2 className="text-4xl font-bold text-center text-primary-dark mb-12">What Our Clients Say</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {testimonials.map((testimonial, index) => (
-            <div
+            <motion.div
               key={testimonial.name}
-              ref={(el) => (testimonialCardsRef.current[index] = el)}
-              className="bg-white p-6 rounded-lg shadow-lg transform transition-transform hover:scale-105"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: index * 0.2, ease: "easeOut" }}
+              whileHover={{ scale: 1.05 }}
+              className="bg-white p-6 rounded-lg shadow-lg transform transition-transform"
             >
               <div className="flex items-center mb-4">
                 <img src={testimonial.image} alt={testimonial.name} className="w-12 h-12 rounded-full mr-4" />
@@ -63,7 +32,7 @@ const Testimonials = () => {
                 </div>
               </div>
               <p className="text-primary-dark">{testimonial.testimonial}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
