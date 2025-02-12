@@ -38,7 +38,9 @@ const ServicesSection = () => {
   ];
 
   useEffect(() => {
-    console.log("Services Data:", services);
+    if (typeof window !== "undefined") {
+      // Run GSAP 
+      console.log("Services Data:", services);
     console.log("Card Refs:", cardRefs.current);
 
     cardRefs.current.forEach((card, index) => {
@@ -70,6 +72,8 @@ const ServicesSection = () => {
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
+    }
+    
   }, []);
 
   return (
